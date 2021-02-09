@@ -11,4 +11,4 @@ w = observation.weather
 temp = w.temperature('celsius')['temp']
 TempFloor = math.floor(temp)
 print("В городе " + place + " сейчас " +  w.detailed_status )
-print('Температура воздуха ' + str(TempFloor) + ' градуса по Цельсию')
+print('Температура воздуха ' + str(TempFloor) + ' градуса по цельсию')
