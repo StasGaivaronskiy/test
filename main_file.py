@@ -1,7 +1,7 @@
 #imports
 from pyowm import OWM
-import math
 from pyowm.utils.config import get_default_config
+import math
 
 #main func
 def main():
@@ -13,10 +13,12 @@ def main():
 
     #set place
     place = input ('В каком городе?:')
-
+    
     #get weather
     temperatureFloor, weather = getWeather(manager,place)
-
+    if temperatureFloor == 0 or weather == 0:
+        print (str(place) + ' не является городом')
+        return 
     #print weather
     printWeather(place,weather,temperatureFloor)
 
@@ -31,7 +33,10 @@ def setToken(resultConfig):
     return manager
 
 def getWeather(manager,place):
-    observation = manager.weather_at_place (place)
+    try:
+        observation = manager.weather_at_place (place)
+    except:
+        return 0,0
     weather = observation.weather
     temperature = weather.temperature('celsius')['temp']
     temperatureFloor = math.floor(temperature)
@@ -39,7 +44,7 @@ def getWeather(manager,place):
 
 def printWeather(place,weather,temperatureFloor):
     print("В городе " + place + " сейчас " +  weather.detailed_status)
-    print('Температура воздуха ' + str(temperatureFloor) + ' градусов по цельсию')
+    print('Температура воздуха ' + str(temperatureFloor) + ' градусов по Цельсию')
 
 #start program
 main()
